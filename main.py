@@ -203,7 +203,7 @@ class PathPlanner:
                 tags="turn_arrow"
             )
 
-            self.textbox.insert(tk.END, f"Rotate {turn_angle:.1f}\u00b0\n")
+            self.textbox.insert(tk.END, f"rotate_{turn_angle:.1f}\n")
             self.turn_mode = False
             self.history.append(('turn', turn_angle))  # Track the turn action
             self.draw_robot(rx, ry, self.robot_angle)
@@ -226,8 +226,8 @@ class PathPlanner:
                 turn_angle = turn_angle*-1
                 self.robot_angle = desired_angle % 360
                 self.canvas.create_line(x1, self.image.height - y1, x2, self.image.height - y2, fill='blue', width=2)
-                self.textbox.insert(tk.END, f"Rotate {turn_angle:.1f}\u00b0\n")
-                self.textbox.insert(tk.END, f"Drive {distance_in:.2f}\"\n")
+                self.textbox.insert(tk.END, f"r{turn_angle:.1f}_")
+                self.textbox.insert(tk.END, f"d{distance_in:.2f}_")
 
             self.robot_position = (x, y)
             self.history.append(('move', x, y, self.robot_angle))  # Track movement action
@@ -280,4 +280,3 @@ if __name__ == "__main__":
     root = tk.Tk()
     app = PathPlanner(root)
     root.mainloop()
-
